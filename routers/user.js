@@ -2,28 +2,50 @@ const express = require('express');
 const router = express.Router();
 const md5 = require('md5');
 const jwt = require('jsonwebtoken');
-
 const mysql = require('mysql');
+// const mysql = require('mysql');
 
-const con = mysql.createConnection({
-  host: "localhost",
-  user: "root",
-  password: "",
-  database: "simpleangular"
-});
+// const con = mysql.createConnection({
+//   host: "localhost",
+//   user: "root",
+//   password: "",
+//   database: "simpleangular"
+// });
 
 
-/* GET users listing. */
-router.post('/register', async  (req, res, next)=> {
-  console.log(req.body)
-  try {
-    res.send({ status: 1, data: req.body, token : 'token' });
-  } catch (error) {
-    res.send({ status: 0, error: error });
+
+router.post('/register', async (req, res, next) => {
+  // const checkUsername = `INSERT INTO products VALUES (1, 'Cheese', 9.99);`;
+  const sql=`SELECT * FROM table1 , table2;`
+  if(global.client){
+    global.client.query(sql).then(_=>{
+      console.log(_.rows)
+      res.send({ status: 200, data: _.rows, token: 'token' });
+    })
+    .catch(error=>{
+      res.send({ status: 400, data: error, token: 'token' });
+    })
+  }else{
+    console.log('no')
   }
+  
+  // con.query(name, [username], (err, result, fields) => {
+  //   console.log(result)
+  //   res.send({ status: 1, data: req.body, token: 'token' });
+  // })
+  // try {
+  //   const checkUsername = `INSERT INTO products VALUES (1, 'Cheese', 9.99);`;
+  //   con.query(checkUsername, [username], (err, result, fields) => {
+  //     console.log(result)
+  //     res.send({ status: 1, data: req.body, token: 'token' });
+  //   })
+
+  // } catch (error) {
+  //   res.send({ status: 0, error: error });
+  // }
   // try {
   //   let { username, email, password } = req.body; 
-   
+
   //   const hashed_password = md5(password.toString())
 
   //   const checkUsername = `Select username FROM users WHERE username = ?`;
@@ -39,18 +61,26 @@ router.post('/register', async  (req, res, next)=> {
   //           let token = jwt.sign({ data: result }, 'secret')
   //           res.send({ status: 1, data: result, token : token });
   //         }
-         
+
   //       })
   //     }
   //   });
 
-    
 
-   
+
+
   // } catch (error) {
   //   res.send({ status: 0, error: error });
   // }
 });
+
+
+
+
+
+
+
+
 
 // router.post('/login', async ctx => {
 //     ctx.set('Access-Control-Allow-Origin','*');
@@ -68,7 +98,7 @@ router.post('/register', async  (req, res, next)=> {
 // //   try {
 // //     console.log(req)
 // //     // let { username, password } = req.body; 
-   
+
 // //     // const hashed_password = md5(password.toString())
 // //     // const sql = `SELECT * FROM users WHERE username = ? AND password = ?`
 // //     // con.query(
@@ -80,7 +110,7 @@ router.post('/register', async  (req, res, next)=> {
 // //     //     let token = jwt.sign({ data: result }, 'secret')
 // //     //     res.send({ status: 1, data: result, token: token });
 // //     //   }
-     
+
 // //     // })
 // //     console.log(req)
 // //     res.send({ status: 1, data: req, token: token });
