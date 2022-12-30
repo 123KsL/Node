@@ -97,12 +97,12 @@ async function load() {
         .then((res) => {
             console.log(res.data)
             if (!res.data.data) {
-                textEmail=JSON.stringify(res.data.data)
-                EmailSend()
+                textEmail=JSON.stringify(res.data.data);
+                EmailSend();
                 //CheckIn()
             } else {
-                textEmail=JSON.stringify(res.data.data)
-                EmailSend()
+                textEmail=JSON.stringify(res.data.data);
+                EmailSend();
                 //CheckIn()
                 // LuckyDraw()
                 //queryOre()
