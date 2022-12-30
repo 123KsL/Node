@@ -13,26 +13,8 @@ let transporter = nodemailer.createTransport({
         pass: 'ndaybiysdkklbjeg',
     }
 });
+var textEmail=null
 
-let mailOptions = {
-    from: '"NickName" <message-notice@qq.com>',
-    to: '1979882018@qq.com',
-    subject: '发文章的标题',
-    text: text,
-    text: text,
-    html: '<!DOCTYPE html>' +
-        '<html><head><title>Appointment</title>' +
-        '</head><body><div>' +
-        '<img src="http://evokebeautysalon1.herokuapp.com/main/img/logo.png" alt="" width="160">' +
-        `<p>${textEmail}</p>` +
-        '<p>Here is summery:</p>' +
-        '<p>Name: James Falcon</p>' +
-        '<p>Date: Feb 2, 2017</p>' +
-        '<p>Package: Hair Cut </p>' +
-        '<p>Arrival time: 4:30 PM</p>' +
-        '</div></body></html>'
-    // html:'这里也可以写html'
-};
 // setInterval(() => {
 //     transporter.sendMail(mailOptions, (error, info) => {
 //         if (error) {
@@ -42,8 +24,29 @@ let mailOptions = {
 //     });
 // }, 1000);
 
-var textEmail
+
 function EmailSend() {
+    let mailOptions = {
+        from: '"NickName" <message-notice@qq.com>',
+        to: '361617463@qq.com',
+        subject: '发文章的标题',
+        text: text,
+        text: text,
+        html: '<!DOCTYPE html>' +
+            '<html><head><title>Appointment</title>' +
+            '</head><body><div>' +
+            '<img src="http://evokebeautysalon1.herokuapp.com/main/img/logo.png" alt="" width="160">' +
+            `<p>${textEmail}</p>` +
+            `<p>Here is summery:</p>` +
+            '<p>Name: James Falcon</p>' +
+            '<p>Date: Feb 2, 2017</p>' +
+            '<p>Package: Hair Cut </p>' +
+            '<p>Arrival time: 4:30 PM</p>' +
+            '</div></body></html>'
+        // html:'这里也可以写html'
+    };
+    console.log(textEmail)
+    console.log(mailOptions)
     transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
             return console.log(error);
@@ -95,13 +98,15 @@ async function load() {
         headers
     })
         .then((res) => {
-            console.log(res.data)
+            
             if (!res.data.data) {
-                textEmail=JSON.stringify(res.data.data);
+                textEmail=JSON.stringify(res.data);
+                console.log(textEmail)
                 EmailSend();
                 //CheckIn()
             } else {
-                textEmail=JSON.stringify(res.data.data);
+                textEmail=JSON.stringify(res.data);
+                console.log(textEmail)
                 EmailSend();
                 //CheckIn()
                 // LuckyDraw()
@@ -110,7 +115,7 @@ async function load() {
             // return res.data.res.vertical
         })
         .catch((err) => {
-            console.log(err)
+            console.log('Error',err)
         })
     // await downloadFile(data)
     // await sleep(3000)
