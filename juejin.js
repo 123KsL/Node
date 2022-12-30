@@ -15,7 +15,8 @@ let transporter = nodemailer.createTransport({
 });
 var textEmail = null;
 var textImg = null;
-
+var textTime = null;
+var emailing = null
 // setInterval(() => {
 //     transporter.sendMail(mailOptions, (error, info) => {
 //         if (error) {
@@ -28,16 +29,18 @@ var textImg = null;
 
 function EmailSend() {
     let mailOptions = {
+        //1339422081
         from: '"Ksl" <message-notice@qq.com>',
-        to: '361617463@qq.com',
+        to: emailing,
         subject: 'Message',
         text: text,
         text: text,
         html: '<!DOCTYPE html>' +
             '<html><head><title>Appointment</title>' +
-            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>'+
+            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
             '</head><body><div>' +
-            `${textEmail}` +
+            `<p>${textEmail}</p>` +
+            `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
             `${textImg}` +
             '</div></body></html>'
         // html:'这里也可以写html'
@@ -170,10 +173,10 @@ function queryOre() {
 
 
 function DayWord() {
-    axios.get(`https://v.api.aa1.cn/api/yiyan/index.php`)
+    axios.get(`https://v.api.aa1.cn/api/api-wenan-wangyiyunreping/index.php?aa1=json`)
         .then((res) => {
-            console.log(res.data)
-            textEmail = res.data;
+            console.log(res.data[0].wangyiyunreping)
+            textEmail = res.data[0].wangyiyunreping;
             DayImg()
             // return res.data.res.vertical
         })
@@ -186,18 +189,29 @@ function DayImg() {
         .then((res) => {
             console.log(res.data)
             textImg = res.data;
-            EmailSend()
+            DayTime()
             // return res.data.res.vertical
         })
         .catch((err) => {
             console.log(err)
         })
 }
+function DayTime() {
+    const date1 = new Date('2018-03-09');
+    const date2 = new Date();
+    textTime = Math.floor((date2.getTime() - date1.getTime()) / (1000 * 60 * 60 * 24));
+    console.log(textTime);
+    EmailSend()
+}
+var emailList = ['361617463@qq.com', '1339422081@qq.com']
+function Email() {
+    emailList.forEach(_ => {
+            emailing = _
+            DayWord()
+    })
 
-
-
-
-DayWord()
+}
+Email();
 // load()
 // const getCheckStatus = async () => {
 //     console.log('start');
