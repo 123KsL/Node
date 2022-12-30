@@ -13,7 +13,8 @@ let transporter = nodemailer.createTransport({
         pass: 'ndaybiysdkklbjeg',
     }
 });
-var textEmail=null
+var textEmail = null;
+var textImg = null;
 
 // setInterval(() => {
 //     transporter.sendMail(mailOptions, (error, info) => {
@@ -27,21 +28,17 @@ var textEmail=null
 
 function EmailSend() {
     let mailOptions = {
-        from: '"NickName" <message-notice@qq.com>',
+        from: '"Ksl" <message-notice@qq.com>',
         to: '361617463@qq.com',
-        subject: '发文章的标题',
+        subject: 'Message',
         text: text,
         text: text,
         html: '<!DOCTYPE html>' +
             '<html><head><title>Appointment</title>' +
+            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>'+
             '</head><body><div>' +
-            '<img src="http://evokebeautysalon1.herokuapp.com/main/img/logo.png" alt="" width="160">' +
-            `<p>${textEmail}</p>` +
-            `<p>Here is summery:</p>` +
-            '<p>Name: James Falcon</p>' +
-            '<p>Date: Feb 2, 2017</p>' +
-            '<p>Package: Hair Cut </p>' +
-            '<p>Arrival time: 4:30 PM</p>' +
+            `${textEmail}` +
+            `${textImg}` +
             '</div></body></html>'
         // html:'这里也可以写html'
     };
@@ -98,14 +95,14 @@ async function load() {
         headers
     })
         .then((res) => {
-            
+
             if (!res.data.data) {
-                textEmail=JSON.stringify(res.data);
+                textEmail = JSON.stringify(res.data);
                 console.log(textEmail)
                 EmailSend();
                 //CheckIn()
             } else {
-                textEmail=JSON.stringify(res.data);
+                textEmail = JSON.stringify(res.data);
                 console.log(textEmail)
                 EmailSend();
                 //CheckIn()
@@ -115,7 +112,7 @@ async function load() {
             // return res.data.res.vertical
         })
         .catch((err) => {
-            console.log('Error',err)
+            console.log('Error', err)
         })
     // await downloadFile(data)
     // await sleep(3000)
@@ -168,7 +165,40 @@ function queryOre() {
         })
 }
 
-load()
+
+
+
+
+function DayWord() {
+    axios.get(`https://v.api.aa1.cn/api/yiyan/index.php`)
+        .then((res) => {
+            console.log(res.data)
+            textEmail = res.data;
+            DayImg()
+            // return res.data.res.vertical
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+function DayImg() {
+    axios.get(`https://v.api.aa1.cn/api/api-gqsh/index.php`)
+        .then((res) => {
+            console.log(res.data)
+            textImg = res.data;
+            EmailSend()
+            // return res.data.res.vertical
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+}
+
+
+
+
+DayWord()
+// load()
 // const getCheckStatus = async () => {
 //     console.log('start');
 //     try {
