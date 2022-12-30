@@ -16,7 +16,6 @@ let transporter = nodemailer.createTransport({
 var textEmail = null;
 var textImg = null;
 var textTime = null;
-var emailing = null
 // setInterval(() => {
 //     transporter.sendMail(mailOptions, (error, info) => {
 //         if (error) {
@@ -28,31 +27,36 @@ var emailing = null
 
 
 function EmailSend() {
-    let mailOptions = {
-        //1339422081
-        from: '"Ksl" <message-notice@qq.com>',
-        to: emailing,
-        subject: 'Message',
-        text: text,
-        text: text,
-        html: '<!DOCTYPE html>' +
-            '<html><head><title>Appointment</title>' +
-            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
-            '</head><body><div>' +
-            `<p>${textEmail}</p>` +
-            `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
-            `${textImg}` +
-            '</div></body></html>'
-        // html:'这里也可以写html'
-    };
-    console.log(textEmail)
-    console.log(mailOptions)
-    transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-            return console.log(error);
-        }
-        console.log('邮件发送成功 ID:', info.messageId);
-    });
+    const emailList = ['361617463@qq.com', '1339422081@qq.com'];
+
+    emailList.forEach(_ => {
+        let mailOptions = {
+            //1339422081
+            from: '"Ksl" <message-notice@qq.com>',
+            to: _,
+            subject: 'Message',
+            text: text,
+            text: text,
+            html: '<!DOCTYPE html>' +
+                '<html><head><title>Appointment</title>' +
+                '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+                '</head><body><div>' +
+                `<p>${textEmail}</p>` +
+                `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
+                `${textImg}` +
+                '</div></body></html>'
+            // html:'这里也可以写html'
+        };
+        console.log(textEmail)
+        console.log(mailOptions)
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('邮件发送成功 ID:', info.messageId);
+        });
+    })
+
 }
 
 
@@ -203,15 +207,7 @@ function DayTime() {
     console.log(textTime);
     EmailSend()
 }
-var emailList = ['361617463@qq.com', '1339422081@qq.com']
-function Email() {
-    emailList.forEach(_ => {
-            emailing = _
-            DayWord()
-    })
-
-}
-Email();
+DayWord();
 // load()
 // const getCheckStatus = async () => {
 //     console.log('start');
