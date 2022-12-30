@@ -64,6 +64,13 @@ const router = express.Router();
 const user = require('./user');
 router.use('/user', user);
 
+const user1 = require('./user1');
+router.use('/user1', user1);
+
+
+// const user2 = require('./user2');
+// router.use('/user2', user2);
+
 
 
 
