@@ -185,7 +185,8 @@ function DayWord() {
             // return res.data.res.vertical
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            DayWord();
         })
 }
 function DayImg() {
@@ -197,7 +198,8 @@ function DayImg() {
             // return res.data.res.vertical
         })
         .catch((err) => {
-            console.log(err)
+            console.log(err);
+            DayImg()
         })
 }
 function DayTime() {
