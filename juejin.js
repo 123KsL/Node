@@ -24,11 +24,13 @@ var textTime = null;
 //         console.log('邮件发送成功 ID:', info.messageId);
 //     });
 // }, 1000);
-
-
 function EmailSend() {
-    const emailList = ['361617463@qq.com', '1339422081@qq.com'];
+    const emailList = ['361617463@qq.com','1339422081@qq.com'];
 
+    const regex = /<img[^>]*src="([^"]*)"/;
+    const html = textImg;
+    const match = regex.exec(html);
+    const src = match[1];  // "image.jpg"
     emailList.forEach(_ => {
         let mailOptions = {
             //1339422081
@@ -37,14 +39,43 @@ function EmailSend() {
             subject: 'Message',
             text: text,
             text: text,
-            html: '<!DOCTYPE html>' +
-                '<html><head><title>Appointment</title>' +
-                '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
-                '</head><body><div>' +
-                `<p>${textEmail}</p>` +
-                `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
-                `${textImg}` +
-                '</div></body></html>'
+            html:'<!DOCTYPE html>' +
+            '<html><head><title>Appointment</title>' +
+            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+            '</head><body>'+
+            `<div style="margin: 0 auto;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: url(${src});">
+              <div style="  width:90%;
+              margin:0 auto;
+              height: 50%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding:5px;
+              justify-content: center;
+              text-align: center;
+              background: rgba(255, 255, 255,0.5);
+              border-radius: 6px;">
+              <p>${textEmail}</p>
+              <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
+              </div>
+            </div>`+
+           '</body></html>'
+
+           
+            // html: '<!DOCTYPE html>' +
+            //     '<html><head><title>Appointment</title>' +
+            //     '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+            //     '</head><body><div>' +
+            //     `<p>${textEmail}</p>` +
+            //     `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
+            //     `${textImg}` +
+            //     '</div></body></html>'
             // html:'这里也可以写html'
         };
         console.log(textEmail)
