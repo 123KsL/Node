@@ -31,16 +31,21 @@ function EmailSend() {
     const html = textImg;
     const match = regex.exec(html);
     const src = match[1];  // "image.jpg"
-    const newyear =`
-    兔跃龙腾辞旧岁 , 龙腾虎跃贺新春
-                                               ----新年快乐
+     const newyear = `
+    <div style="width:230px;height:600px;">
+    <p style="width:100%;text-align:center;font-size:20px;font-weight: 600;">喜 辞 旧 岁</p>
+    <div style="width:100%; display: flex;justify-content: space-between;align-items: center;">
+    <div style="writing-mode: vertical-lr;width: fit-content;font-size:20px;font-weight: 600;">兔 跃 龙 腾 辞 旧 岁</div>        
+    <div style="writing-mode: vertical-lr;width: fit-content;font-size:20px;font-weight: 600;">龙 腾 虎 跃 贺 新 春 </div>   
+    </div>
+    </div>         
     `
     emailList.forEach(_ => {
         let mailOptions = {
             //1339422081
             from: '"Ksl" <message-notice@qq.com>',
             to: _,
-            subject:new Date()==Date('2022-1-22')?'喜 辞 旧 岁':'Message',
+            subject:new Date()==Date('2022-1-22')?'2023新年快乐':'Message',
             text: text,
             text: text,
             html:'<!DOCTYPE html>' +
@@ -66,7 +71,7 @@ function EmailSend() {
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
               <p>${ new Date()==Date('2022-1-22')?newyear:textEmail}</p>
-              <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
+              <p style="text-align: right;width: 100%;">恋爱计时器:&nbsp;${}</p>
               </div>
             </div>`+
            '</body></html>'
