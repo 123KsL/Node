@@ -43,7 +43,7 @@ function EmailSend() {
     emailList.forEach(_ => {
         let mailOptions = {
             //1339422081
-            from: '"Ksl" <message-notice@qq.com>',
+            from: '`${_==361617463@qq.com}?'KsL':'小仙女'` <message-notice@qq.com>',
             to: _,
             subject:new Date()==Date('2022-1-22')?'2023新年快乐':'Message',
             text: text,
