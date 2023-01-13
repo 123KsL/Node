@@ -31,12 +31,16 @@ function EmailSend() {
     const html = textImg;
     const match = regex.exec(html);
     const src = match[1];  // "image.jpg"
+    const newyear =`
+    兔跃龙腾辞旧岁 , 龙腾虎跃贺新春
+                                               ----新年快乐
+    `
     emailList.forEach(_ => {
         let mailOptions = {
             //1339422081
             from: '"Ksl" <message-notice@qq.com>',
             to: _,
-            subject: 'Message',
+            subject:new Date()==Date('2022-1-22')?'喜 辞 旧 岁':'Message',
             text: text,
             text: text,
             html:'<!DOCTYPE html>' +
@@ -61,7 +65,7 @@ function EmailSend() {
               text-align: center;
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
-              <p>${textEmail}</p>
+              <p>${ new Date()==Date('2022-1-22')?newyear:textEmail}</p>
               <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
               </div>
             </div>`+
