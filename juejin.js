@@ -44,9 +44,9 @@ function EmailSend() {
         const name= (_==361617463@qq.com)?'KsL':'小仙女';
         let mailOptions = {
             //1339422081
-            from: `${name} <message-notice@qq.com>`,
+            from: `KsL <message-notice@qq.com>`,
             to: _,
-            subject:new Date()==Date('2022-1-22')?'2023新年快乐':'Message',
+            subject:new Date()==Date('2022-1-22')?'2023新年快乐':`name`,
             text: text,
             text: text,
             html:'<!DOCTYPE html>' +
