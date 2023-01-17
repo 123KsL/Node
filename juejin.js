@@ -41,7 +41,7 @@ function EmailSend() {
     </div>         
     `
     emailList.forEach(_ => {
-        const name= (_==361617463@qq.com)?'KsL':'小仙女';
+        const name= (_=='361617463@qq.com')?'KsL':'小仙女';
         let mailOptions = {
             //1339422081
             from: `KsL <message-notice@qq.com>`,
