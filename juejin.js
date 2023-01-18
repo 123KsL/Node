@@ -72,7 +72,7 @@ function EmailSend() {
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
               <p>${ new Date()==Date('2022-1-22')?newyear:textEmail}</p>
-              <p style="text-align: right;width: 100%;">恋爱计时器:&nbsp;${}</p>
+              <p style="text-align: right;width: 100%;">恋爱计时器:   </p>
               </div>
             </div>`+
            '</body></html>'
