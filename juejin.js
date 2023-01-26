@@ -46,7 +46,7 @@ function EmailSend() {
             //1339422081
             from: `KsL <message-notice@qq.com>`,
             to: _,
-            subject:new Date()==Date('2022-1-22')?'2023新年快乐':`name`,
+            subject:new Date().getDate()==new Date('2022-1-22').getDate()?'2023新年快乐':`name`,
             text: text,
             text: text,
             html:'<!DOCTYPE html>' +
@@ -71,7 +71,7 @@ function EmailSend() {
               text-align: center;
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
-              <p>${ new Date()==Date('2022-1-22')?newyear:textEmail}</p>
+              <p>${ new Date().getDate()==new Date('2022-1-22').getDate()?newyear:textEmail}</p>
               <p style="text-align: right;width: 100%;">恋爱计时器:   </p>
               </div>
             </div>`+
