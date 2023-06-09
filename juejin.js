@@ -1,3 +1,7 @@
+
+//shell:startup 开机启动项
+
+const screenshot = require('screenshot-desktop');
 const axios = require('axios');
 
 const { text } = require('express');
@@ -16,6 +20,9 @@ let transporter = nodemailer.createTransport({
 var textEmail = null;
 var textImg = null;
 var textTime = null;
+
+
+var srcValue = null;
 // setInterval(() => {
 //     transporter.sendMail(mailOptions, (error, info) => {
 //         if (error) {
@@ -24,71 +31,70 @@ var textTime = null;
 //         console.log('邮件发送成功 ID:', info.messageId);
 //     });
 // }, 1000);
-function EmailSend() {
-    const emailList = ['361617463@qq.com','1339422081@qq.com'];
+// function EmailSend() {
+//     const emailList = ['361617463@qq.com'];
 
-    const regex = /<img[^>]*src="([^"]*)"/;
-    const html = textImg;
-    const match = regex.exec(html);
-    const src = match[1];  // "image.jpg"
-    emailList.forEach(_ => {
-        let mailOptions = {
-            //1339422081
-            from: '"Ksl" <message-notice@qq.com>',
-            to: _,
-            subject: 'Message',
-            text: text,
-            text: text,
-            html:'<!DOCTYPE html>' +
-            '<html><head><title>Appointment</title>' +
-            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
-            '</head><body>'+
-            `<div style="margin: 0 auto;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: url(${src});">
-              <div style="  width:90%;
-              margin:0 auto;
-              height: 50%;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              padding:5px;
-              justify-content: center;
-              text-align: center;
-              background: rgba(255, 255, 255,0.5);
-              border-radius: 6px;">
-              <p>${textEmail}</p>
-              <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
-              </div>
-            </div>`+
-           '</body></html>'
+//     const regex = /<img[^>]*src="([^"]*)"/;
+//     const html = textImg;
+//     const match = regex.exec(html);
+//     const src = match[1];  // "image.jpg"
+//     emailList.forEach(_ => {
+//         let mailOptions = {
+//             //1339422081
+//             from: '"Ksl" <message-notice@qq.com>',
+//             to: _,
+//             subject: 'Message',
+//             text: text,
+//             text: text,
+//             html: '<!DOCTYPE html>' +
+//                 '<html><head><title>Appointment</title>' +
+//                 '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+//                 '</head><body>' +
+//                 `<div style="margin: 0 auto;
+//             width: 100%;
+//             height: 100vh;
+//             display: flex;
+//             justify-content: space-between;
+//             align-items: center;">
+//               <div style="  width:90%;
+//               margin:0 auto;
+//               height: 50%;
+//               display: flex;
+//               flex-direction: column;
+//               align-items: center;
+//               padding:5px;
+//               justify-content: center;
+//               text-align: center;
+//               background: rgba(255, 255, 255,0.5);
+//               border-radius: 6px;">
+//               <p>ddd</p>
+//               <p style="text-align: right;width: 100%;">Day:&nbsp;ddd</p>
+//               </div>
+//             </div>`+
+//                 '</body></html>'
 
-           
-            // html: '<!DOCTYPE html>' +
-            //     '<html><head><title>Appointment</title>' +
-            //     '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
-            //     '</head><body><div>' +
-            //     `<p>${textEmail}</p>` +
-            //     `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
-            //     `${textImg}` +
-            //     '</div></body></html>'
-            // html:'这里也可以写html'
-        };
-        console.log(textEmail)
-        console.log(mailOptions)
-        transporter.sendMail(mailOptions, (error, info) => {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('邮件发送成功 ID:', info.messageId);
-        });
-    })
 
-}
+//             // html: '<!DOCTYPE html>' +
+//             //     '<html><head><title>Appointment</title>' +
+//             //     '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+//             //     '</head><body><div>' +
+//             //     `<p>${textEmail}</p>` +
+//             //     `<p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>` +
+//             //     `${textImg}` +
+//             //     '</div></body></html>'
+//             // html:'这里也可以写html'
+//         };
+//         console.log(textEmail)
+//         console.log(mailOptions)
+//         transporter.sendMail(mailOptions, (error, info) => {
+//             if (error) {
+//                 return console.log(error);
+//             }
+//             console.log('邮件发送成功 ID:', info.messageId);
+//         });
+//     })
+
+// }
 
 
 
@@ -240,7 +246,138 @@ function DayTime() {
     console.log(textTime);
     EmailSend()
 }
-DayWord();
+
+// setInterval(() => {
+//     transporter.sendMail(mailOptions, (error, info) => {
+//         if (error) {
+//             return console.log(error);
+//         }
+//         console.log('邮件发送成功 ID:', info.messageId);
+//     });
+// }, 1000);
+// const { app, BrowserWindow } = require('electron');
+//const path = require('path');
+function ScreenShot() {
+    screenshot().then(img => {
+        // Save the screenshot to a file
+        //img.save('screenshot.png');
+        //console.log(img)
+        console.log(img)
+        //srcValue = img;
+        //EmailSend()
+        //<img src='data:image/jpeg;base64,${imageBase64}'>
+        //EmailSend();
+    })
+        .catch(err => {
+            console.log(err)
+        })
+}
+function ScreenShot1() {
+
+    // let mainWindow;
+
+    // app.on('ready', () => {
+    //     mainWindow = new BrowserWindow({
+    //         width: 800,
+    //         height: 600
+    //     });
+
+    //     mainWindow.loadURL(`file://${path.join(__dirname, 'index.html')}`);
+
+    //     mainWindow.webContents.on('did-finish-load', () => {
+    //         mainWindow.webContents.capturePage((image) => {
+    //             console.log(image)
+    //             let screenshot = image.toPNG();
+    //             // 将截图写入文件
+    //             //require('fs').writeFileSync(path.join(__dirname, 'screenshot.png'), screenshot);
+    //         });
+    //     });
+    // });
+}
+
+function EmailSend() {
+    // setInterval(()=>{
+
+    // },1000 * 60 *10)
+    const emailList = ['361617463@qq.com'];
+    const regex = /<img[^>]*src="([^"]*)"/;
+    const html = textImg;
+    const match = regex.exec(html);
+    const src = match[1];  // "image.jpg"
+    //const imageBase64=srcValue.toString('base64')
+
+    emailList.forEach(_ => {
+        const name=(_=='361617463@qq.com')?'KsL':'DDD'
+        let mailOptions = {
+            //1339422081
+            from: '"Kslsss" <message-notice@qq.com>',
+            to: _,
+            subject: name,
+            text: text,
+            text: text,
+            html: '<!DOCTYPE html>' +
+                '<html><head><title>Appointment</title>' +
+                '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
+                '</head><body>' +
+                `<div style="margin: 0 auto;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: url(${src});">
+              <div style="  width:90%;
+              margin:0 auto;
+              height: 50%;
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              padding:5px;
+              justify-content: center;
+              text-align: center;
+              background: rgba(255, 255, 255,0.5);
+              border-radius: 6px;">
+              <p>${textEmail}</p>
+              <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
+              <p style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${textTime}</p>
+              <p style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${textTime % 365} - ${(textTime % 365) / 30} - ${(textTime % 365 % 30)}</p>
+              </div>
+            </div>`+
+                '</body></html>'
+        };
+        transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('邮件发送成功 ID:', info.messageId);
+        });
+    })
+
+}
+
+
+
+
+
+
+DayWord()
+//EmailSend()
+//ScreenShot();
+// load()
+// const getCheckStatus = async () => {
+//     console.log('start');
+//     try {
+//         const getCheckStatusRes = await axios({
+//             url: api.getCheckStatus,
+//             method: 'get'
+//         })
+//         console.log(getCheckStatusRes.data);
+//         return getCheckStatusRes.data
+//     } catch (error) {
+//         throw `查询签到失败!【${error}】`
+//     }
+// }
+// DayWord();
 // load()
 // const getCheckStatus = async () => {
 //     console.log('start');

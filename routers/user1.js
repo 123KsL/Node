@@ -9,7 +9,7 @@ router.get('/tableGet', async (req, res, next) => {
     if (global.client) {
         //console.log(sql)
         global.client.query(sql).then(_ => {
-            console.log(_)
+            //console.log(_)
             res.send({ status: 200, data: _.rows, token: 'token' });
         })
             .catch(error => {
@@ -20,6 +20,8 @@ router.get('/tableGet', async (req, res, next) => {
     }
 
 })
+
+
 
 
 module.exports = router;
