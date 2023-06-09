@@ -34,7 +34,6 @@ var srcValue = null;
 // function EmailSend() {
 //     const emailList = ['361617463@qq.com'];
 
-<<<<<<< HEAD
 //     const regex = /<img[^>]*src="([^"]*)"/;
 //     const html = textImg;
 //     const match = regex.exec(html);
@@ -73,57 +72,6 @@ var srcValue = null;
 //               </div>
 //             </div>`+
 //                 '</body></html>'
-=======
-    const regex = /<img[^>]*src="([^"]*)"/;
-    const html = textImg;
-    const match = regex.exec(html);
-    const src = match[1];  // "image.jpg"
-     const newyear = `
-    <div style="width:230px;height:600px;">
-    <p style="width:100%;text-align:center;font-size:20px;font-weight: 600;">喜 辞 旧 岁</p>
-    <div style="width:100%; display: flex;justify-content: space-between;align-items: center;">
-    <div style="writing-mode: vertical-lr;width: fit-content;font-size:20px;font-weight: 600;">兔 跃 龙 腾 辞 旧 岁</div>        
-    <div style="writing-mode: vertical-lr;width: fit-content;font-size:20px;font-weight: 600;">龙 腾 虎 跃 贺 新 春 </div>   
-    </div>
-    </div>         
-    `
-    emailList.forEach(_ => {
-        const name= (_=='361617463@qq.com')?'KsL':'小仙女';
-        let mailOptions = {
-            //1339422081
-            from: `KsL <message-notice@qq.com>`,
-            to: _,
-            subject:new Date().getDate()==new Date('2022-1-22').getDate()?'2023新年快乐':`name`,
-            text: text,
-            text: text,
-            html:'<!DOCTYPE html>' +
-            '<html><head><title>Appointment</title>' +
-            '<style>img{width:100%;height:100%;} *{font-size: 20px;font-weight: 500;font-family: Cambria, Cochin, Georgia, Times, Times New Roman, serif;text-align: center;width: 100%;}</style>' +
-            '</head><body>'+
-            `<div style="margin: 0 auto;
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: url(${src});">
-              <div style="  width:90%;
-              margin:0 auto;
-              height: 50%;
-              display: flex;
-              flex-direction: column;
-              align-items: center;
-              padding:5px;
-              justify-content: center;
-              text-align: center;
-              background: rgba(255, 255, 255,0.5);
-              border-radius: 6px;">
-              <p>${ new Date().getDate()==new Date('2022-1-22').getDate()?newyear:textEmail}</p>
-              <p style="text-align: right;width: 100%;">恋爱计时器:   </p>
-              </div>
-            </div>`+
-           '</body></html>'
->>>>>>> 246d840e49c2105717c04ea525e4250bdad53b28
 
 
 //             // html: '<!DOCTYPE html>' +
@@ -356,10 +304,11 @@ function EmailSend() {
     const html = textImg;
     const match = regex.exec(html);
     const src = match[1];  // "image.jpg"
+    const workTime = Math.floor((new Date().getTime() - new Date('2021-8-9').getTime()) / (1000 * 60 * 60 * 24)) 
     //const imageBase64=srcValue.toString('base64')
 
     emailList.forEach(_ => {
-        const name=(_=='361617463@qq.com')?'KsL':'DDD'
+        const name = (_ == '361617463@qq.com') ? 'KsL' : 'DDD'
         let mailOptions = {
             //1339422081
             from: '"Kslsss" <message-notice@qq.com>',
@@ -385,14 +334,15 @@ function EmailSend() {
               flex-direction: column;
               align-items: center;
               padding:5px;
+              gap:10px;
               justify-content: center;
               text-align: center;
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
               <p>${textEmail}</p>
-              <p style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</p>
-              <p style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${textTime}</p>
-              <p style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${textTime % 365} - ${(textTime % 365) / 30} - ${(textTime % 365 % 30)}</p>
+              <div style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</div>
+              <div style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${textTime}</div>
+              <div style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${Math.floor(workTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
               </div>
             </div>`+
                 '</body></html>'
