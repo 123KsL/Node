@@ -340,8 +340,9 @@ function EmailSend() {
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
               <p>${textEmail}</p>
-              <div style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</div>
-              <div style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${textTime}</div>
+              <div style="text-align: right;width: 100%;">TotalDay:&nbsp;${textTime}</div>
+              <div style="text-align: right;width: 100%;">DetailDay:&nbsp;${Math.floor(textTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
+              <div style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${workTime}</div>
               <div style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${Math.floor(workTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
               </div>
             </div>`+
