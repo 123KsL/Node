@@ -341,6 +341,7 @@ function EmailSend() {
               border-radius: 6px;">
               <p>${textEmail}</p>
               <div style="text-align: right;width: 100%;">Day:&nbsp;${textTime}</div>
+               <div style="text-align: right;width: 100%;">Day DetailDay:&nbsp;${Math.floor(textTime / 365)} - ${Math.floor((textTime % 365) / 30)} - ${(textTime % 365 % 30)}</div>
               <div style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${workTime}</div>
               <div style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${Math.floor(workTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
               </div>
