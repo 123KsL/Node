@@ -304,7 +304,8 @@ function EmailSend() {
     const html = textImg;
     const match = regex.exec(html);
     const src = match[1];  // "image.jpg"
-    const workTime = Math.floor((new Date().getTime() - new Date('2021-8-9').getTime()) / (1000 * 60 * 60 * 24)) 
+    const workTime = Math.floor((new Date().getTime() - new Date('2021-8-9').getTime()) / (1000 * 60 * 60 * 24));
+    const otherTime = Math.floor((new Date().getTime() - new Date('2018-03-09').getTime()) / (1000 * 60 * 60 * 24));
     //const imageBase64=srcValue.toString('base64')
 
     emailList.forEach(_ => {
@@ -340,10 +341,17 @@ function EmailSend() {
               background: rgba(255, 255, 255,0.5);
               border-radius: 6px;">
               <p>${textEmail}</p>
+<<<<<<< HEAD
               <div style="text-align: right;width: 100%;">TotalDay:&nbsp;${textTime}</div>
               <div style="text-align: right;width: 100%;">DetailDay:&nbsp;${Math.floor(textTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
               <div style="text-align: right;width: 100%;">Work TotalDay:&nbsp;${workTime}</div>
               <div style="text-align: right;width: 100%;">Work DetailDay:&nbsp;${Math.floor(workTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
+=======
+              <div style="text-align: right;width: 100%;">We:&nbsp;${otherTime}</div>
+               <div style="text-align: right;width: 100%;">We:&nbsp;${Math.floor(otherTime / 365)} - ${Math.floor((otherTime % 365) / 30)} - ${(otherTime % 365 % 30)}</div>
+              <div style="text-align: right;width: 100%;">Work:&nbsp;${workTime}</div>
+              <div style="text-align: right;width: 100%;">Work:&nbsp;${Math.floor(workTime / 365)} - ${Math.floor((workTime % 365) / 30)} - ${(workTime % 365 % 30)}</div>
+>>>>>>> 860a4948e89ccff9dee85e8f20d8718bea18192e
               </div>
             </div>`+
                 '</body></html>'
@@ -363,8 +371,8 @@ function EmailSend() {
 
 
 
-DayWord()
-//EmailSend()
+//DayWord()
+EmailSend()
 //ScreenShot();
 // load()
 // const getCheckStatus = async () => {
