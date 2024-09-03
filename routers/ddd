@@ -1,0 +1,2 @@
+ //pkg createNotepad.ps1  pkg(npm 打包工具,createNotepad.ps1要打包的文件)
+ //打包为 文件名.exe可执行文件 三个电脑系统都有
